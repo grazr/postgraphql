@@ -444,8 +444,14 @@ export default function createPostGraphQLHttpRequestHandler (options) {
         const ms = Math.round((timeDiff[0] * 1e9 + timeDiff[1]) * 10e-7 * 100) / 100
 
         // If we have enabled the query log for the Http handler, use that.
+        let output;
+        if (errorCount === 0) {
+          output = console.log
+        } else {
+          output = console.error
+        }
         // tslint:disable-next-line no-console
-        console.log(`${chalk[errorCount === 0 ? 'green' : 'red'](`${errorCount} error(s)`)} ${pgRole != null ? `as ${chalk.magenta(pgRole)} ` : ''}in ${chalk.grey(`${ms}ms`)} :: ${prettyQuery}`)
+        output(`${chalk[errorCount === 0 ? 'green' : 'red'](`${errorCount} error(s)`)} ${pgRole != null ? `as ${chalk.magenta(pgRole)} ` : ''}in ${chalk.grey(`${ms}ms`)} :: ${prettyQuery}`)
       }
     }
   }

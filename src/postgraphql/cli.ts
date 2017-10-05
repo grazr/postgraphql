@@ -135,17 +135,17 @@ const server = createServer(postgraphql(pgConfig, schemas, {
 // Start our server by listening to a specific port and host name. Also log
 // some instructions and other interesting information.
 server.listen(port, hostname, () => {
-  console.log('')
-  console.log(`PostGraphQL server listening on port ${chalk.underline(server.address().port.toString())} 🚀`)
-  console.log('')
-  console.log(`  ‣ Connected to Postgres instance ${chalk.underline.blue(isDemo ? 'postgraphql_demo' : `postgres://${pgConfig.host}:${pgConfig.port || 5432}${pgConfig.database != null ? `/${pgConfig.database}` : ''}`)}`)
-  console.log(`  ‣ Introspected Postgres schema(s) ${schemas.map(schema => chalk.magenta(schema)).join(', ')}`)
-  console.log(`  ‣ GraphQL endpoint served at ${chalk.underline(`http://${hostname}:${port}${graphqlRoute}`)}`)
+  console.error('')
+  console.error(`PostGraphQL server listening on port ${chalk.underline(server.address().port.toString())} 🚀`)
+  console.error('')
+  console.error(`  ‣ Connected to Postgres instance ${chalk.underline.blue(isDemo ? 'postgraphql_demo' : `postgres://${pgConfig.host}:${pgConfig.port || 5432}${pgConfig.database != null ? `/${pgConfig.database}` : ''}`)}`)
+  console.error(`  ‣ Introspected Postgres schema(s) ${schemas.map(schema => chalk.magenta(schema)).join(', ')}`)
+  console.error(`  ‣ GraphQL endpoint served at ${chalk.underline(`http://${hostname}:${port}${graphqlRoute}`)}`)
 
   if (!disableGraphiql)
-    console.log(`  ‣ GraphiQL endpoint served at ${chalk.underline(`http://${hostname}:${port}${graphiqlRoute}`)}`)
+    console.error(`  ‣ GraphiQL endpoint served at ${chalk.underline(`http://${hostname}:${port}${graphiqlRoute}`)}`)
 
-  console.log('')
-  console.log(chalk.gray('* * *'))
-  console.log('')
+  console.error('')
+  console.error(chalk.gray('* * *'))
+  console.error('')
 })
